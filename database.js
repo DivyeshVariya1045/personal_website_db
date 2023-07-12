@@ -14,7 +14,7 @@ mongoose.set("strictQuery", false);
 
 const db = mongoose
   .connect(
-    "mongodb+srv://Divyesh:divyesh123@cluster0.8btjodd.mongodb.net/personal_website_db",
+    "mongodb+srv://Divyesh:divyesh123@cluster0.8btjodd.mongodb.net/personal_website_db?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
