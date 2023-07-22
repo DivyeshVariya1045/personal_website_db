@@ -6,17 +6,14 @@ var insertReview = (req, res) => {
       console.log("body", req.body);
       reviewModel
         .create({
-          r_desc: req.body.review,
-          u_id: req.body.u_id,
-          s_id: req.body.s_id,
-          r_date: req.body.date,
-          rating: req.body.rating,
-          isInserted:0
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          message: req.body.message,
         })
         .then((result) => {
           if (result) {
             res.send({
-              status: 1,
+              status: 200,
               result: result,
               message: "review posted successfully...",
             });
@@ -35,32 +32,16 @@ var insertReview = (req, res) => {
   var getReviewConntroller = (req, res) => {
     try {
       reviewModel
-          .aggregate([
-            {
-              $lookup: {
-                from: "users",
-                localField: "u_id",
-                foreignField: "_id",
-                as: "user",
-              },
-            },
-            // { $unwind: "$u_id" },
-          ])
-          .exec((err, review) => {
-          
-            if (err) {
-              console.log(err);
-              res.send({ status: 0, data: [], message: "Products List not Found" });
-            } else {
-              if (review.length > 0) {
-           
-                res.send({ status: 1, data: review, message: "Product List" });
-              }
-            }
-          });
-           }   catch (error) {
+      .find()
+      .then((review) => {
+        res.send({ reviews: review });
+      })
+      .catch((error) => {
         console.log(error);
-      }
+      });
+  } catch (error) {
+    console.log("error found");
+  }
   };
 
 
