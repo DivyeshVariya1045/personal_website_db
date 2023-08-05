@@ -38,6 +38,40 @@ var insertReview = (req, res) => {
   }
 };
 
+var updateReview = (req, res) => {
+  try {
+    reviewModel
+      .findByIdAndUpdate(
+        {
+          _id: req.body._id,
+        },
+        {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          message: req.body.message,
+          userId: req.body.userId,
+
+        }
+      )
+      .then((result) => {
+        if (result) {
+          res.send({
+            status: 200,
+            result: result,
+            message: "Review updated successfully...",
+          });
+        } else {
+          res.send({ status: 0, result: [], message: "Review not updated" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 var getReviewConntroller = (req, res) => {
   try {
     reviewModel
@@ -56,4 +90,5 @@ var getReviewConntroller = (req, res) => {
 module.exports = {
   insertReview,
   getReviewConntroller,
+  updateReview
 };

@@ -55,6 +55,7 @@ app.post("/insert-user", userController.insertUserController);
 // app.post("/delete-services", servicesController.deleteServices);
 //review
 app.post("/insert-review", reviewController.insertReview);
+app.post("/update-review",reviewController.updateReview);
 app.get("/get-review", reviewController.getReviewConntroller);
 
 
