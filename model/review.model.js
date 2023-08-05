@@ -8,6 +8,9 @@ const reviewSchema = mongoose.Schema({
   message: {
     type: String,
   },
+  userId:{
+    type:String
+  }
 });
 
 module.exports = mongoose.model("review", reviewSchema);
